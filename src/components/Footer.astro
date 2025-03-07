@@ -1,0 +1,68 @@
+---
+// Footer component
+---
+
+<footer>
+  <div class="footer-container">
+    <div class="copyright">
+      <p>Copyright 2025 Elian B.</p>
+    </div>
+    <div class="social-links">
+      <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+      <span class="separator">/</span>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">Github</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    width: 100%;
+    padding: 20px 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .copyright p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: #666;
+  }
+  
+  .separator {
+    margin: 0 8px;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+</style>

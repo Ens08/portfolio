@@ -1,0 +1,159 @@
+---
+import bamboo from '../assets/bamboo.svg';
+---
+
+<section class="header-section">
+  <div class="content">
+    <h1 class="name">Elian<span class="comma">,</span></h1>
+    <h2 class="title">Webdesigner</h2>
+    <p class="description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed 
+      lacinia nisi. Vestibulum e bibendum sapien. Vestibulum ante ipsum 
+      primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut eu 
+      ullamcorper tortor. Sed commodo purus libero, vitae viverra turpis 
+      ultrices nec. Nulla non sem est. Mauris iaculis arcu dolor, non varius 
+      urna auctor ac. Sed id faucibus magna. Sed id auctor odio. Ut in sagittis 
+      justo.
+    </p>
+  </div>
+  <img class="bamboo-image" src={bamboo.src} alt="Decorative bamboo with red flowers" />
+  
+  <div class="scroll-container">
+    <div class="scroll-indicator">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse">
+        <rect x="5" y="2" width="14" height="20" rx="7"/>
+        <path d="M12 6v4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .header-section {
+    position: relative;
+    padding: 0 100px;
+    overflow: hidden;
+    height: calc(100vh - 70px);
+    margin-top: 70px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 80px; /* Add space for the scroll indicator */
+  }
+
+  .name {
+    font-size: 7rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+    color: #111;
+  }
+
+  .comma {
+    color: #111; /* Same color as the text */
+  }
+
+  .title {
+    font-size: 6rem;
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+    color: #111;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .bamboo-image {
+    position: absolute;
+    top: 90px;
+    right: 0;
+    height: 100%; /* Further reduced size */
+    max-height: 650px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .scroll-container {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+  }
+  
+  .scroll-indicator {
+    color: #DB241E;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .bamboo-image {
+      opacity: 0.7;
+      right: -5%;
+      height: 75%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-section {
+      padding: 0 20px;
+    }
+
+    .name {
+      font-size: 3.5rem;
+    }
+
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .bamboo-image {
+      opacity: 0.4;
+      right: -15%;
+      height: 70%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-section {
+      padding: 0 20px;
+    }
+
+    .name {
+      font-size: 2.5rem;
+    }
+
+    .title {
+      font-size: 2rem;
+    }
+
+    .bamboo-image {
+      opacity: 0.3;
+      right: -25%;
+      height: 65%;
+    }
+  }
+</style>

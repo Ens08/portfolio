@@ -1,0 +1,200 @@
+---
+import dotIcon from '../assets/dot.png';
+import waveIcon from '../assets/wave.png';
+import waveTriangleIcon from '../assets/wave-triangle.png';
+import arrowRightIcon from '../assets/arrow-right.svg';
+---
+
+<section class="methodology-section">
+  <div class="container">
+    <h2 class="title">Ma méthologie</h2>
+    
+    <div class="methodology-steps">
+      <div class="step">
+        <div class="step-icon">
+          <img src={dotIcon.src} alt="Icône points" />
+        </div>
+        <div class="step-content">
+          <h3>Briefing & Analyse</h3>
+          <p>Commencez par une réunion de démarrage afin de bien comprendre les objectifs, la cible, et les valeurs de l'entreprise. Cette étape permet de recueillir les besoins et les attentes du client pour définir une vision claire du projet.</p>
+        </div>
+      </div>
+      
+      <div class="arrow">
+        <img src={arrowRightIcon.src} alt="Flèche droite" />
+      </div>
+      
+      <div class="step">
+        <div class="step-icon">
+          <img src={waveIcon.src} alt="Icône vague" />
+        </div>
+        <div class="step-content">
+          <h3>Conception & Prototypage</h3>
+          <p>Créez des maquettes ou des wireframes qui illustrent vos propositions de design. Ce processus itératif offre au client l'opportunité de donner son feedback et d'ajuster le concept avant de passer à la phase de développement.</p>
+        </div>
+      </div>
+      
+      <div class="arrow">
+        <img src={arrowRightIcon.src} alt="Flèche droite" />
+      </div>
+      
+      <div class="step">
+        <div class="step-icon">
+          <img src={waveTriangleIcon.src} alt="Icône vague triangulaire" />
+        </div>
+        <div class="step-content">
+          <h3>Création, Tests & Lancement</h3>
+          <p>Une fois la maquette validée, réalisez le développement du site en effectuant des tests pour garantir sa compatibilité et sa performance sur différents supports. Enfin, procédez au lancement et prévoyez un suivi post-lancement pour ajuster selon les retours des utilisateurs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .methodology-section {
+    padding: 6rem 100px;
+    background-color: #F5F5F5;
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    font-weight: 600;
+    color: #0A1B40;
+  }
+  
+  .methodology-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .step {
+    flex: 1;
+    width: 300px;
+    height: 450px;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: flex-start;
+    overflow: auto;
+  }
+  
+  .step-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .step-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .step-content h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #0A1B40;
+    line-height: 100%;
+  }
+  
+  .step-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .arrow img {
+    width: 80px;
+    height: auto;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1200px) {
+    .methodology-steps {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .step {
+      max-width: 100%;
+      width: 100%;
+    }
+    
+    .arrow {
+      transform: rotate(90deg);
+      margin: 1rem 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .methodology-section {
+      padding: 4rem 20px;
+    }
+    
+    .title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .step {
+      padding: 1.5rem;
+    }
+    
+    .step-icon {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .step-content h3 {
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .title {
+      font-size: 1.75rem;
+    }
+    
+    .step-icon {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .step-content h3 {
+      font-size: 1.1rem;
+    }
+    
+    .step-content p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

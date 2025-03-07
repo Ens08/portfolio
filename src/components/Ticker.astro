@@ -1,0 +1,113 @@
+---
+// Import des images depuis le dossier assets/ticker
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+// Récupération des images du dossier assets/ticker
+const logos = await Astro.glob('../assets/ticker/*');
+
+// Duplicate the logos array to ensure we have enough items for a smooth loop
+const duplicatedLogos = [...logos, ...logos, ...logos];
+---
+
+<div class="ticker-container">
+  <div class="ticker">
+    <div class="ticker-wrapper">
+      {duplicatedLogos.map((logo) => (
+        <div class="ticker-item">
+          <img src={logo.default.src} alt="Logo" loading="eager" decoding="async" fetchpriority="high" />
+        </div>
+      ))}
+    </div>
+    <div class="ticker-wrapper" aria-hidden="true">
+      {duplicatedLogos.map((logo) => (
+        <div class="ticker-item">
+          <img src={logo.default.src} alt="Logo" loading="eager" decoding="async" fetchpriority="high" />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticker-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 100px 0;
+    background: inherit;
+    position: relative;
+  }
+
+  .ticker {
+    display: flex;
+    width: fit-content;
+    gap: 0;
+    position: relative;
+  }
+
+  .ticker-wrapper {
+    display: flex;
+    animation: ticker 90s linear infinite;
+    gap: 0;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .ticker-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .ticker-item img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Preload all images to prevent loading gaps */
+  @media (prefers-reduced-motion: no-preference) {
+    .ticker-container::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+      background-image: none;
+    }
+  }
+</style>
+
+<script>
+  // Preload all images to ensure they're ready before animation starts
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.ticker-item img');
+    
+    // Force browser to load all images immediately
+    images.forEach(img => {
+      if (img instanceof HTMLImageElement) {
+        const imageLoader = new Image();
+        imageLoader.src = img.src;
+      }
+    });
+  });
+</script>

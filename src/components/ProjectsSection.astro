@@ -1,0 +1,253 @@
+---
+// ProjectsSection.astro - Composant pour afficher la liste des projets
+import imageSvg from '../assets/image.svg';
+import rivaImg from '../assets/projects/riva.png';
+import advrImg from '../assets/projects/advr.png';
+import elecImg from '../assets/projects/elec66.png';
+---
+
+<section class="projects-section">
+  <div class="container">
+    <p class="subtitle">La passion nous mènent ici</p>
+    <h2 class="title">Mes différents projets</h2>
+    
+    <div class="projects-list">
+      <div class="project-item" data-project="riva">
+        <div class="project-number">01.</div>
+        <div class="project-title">Riva Solutions</div>
+        <div class="project-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="project-image">
+          <img src={imageSvg.src} alt="Riva Solutions" />
+        </div>
+        <div class="hover-image">
+          <img src={rivaImg.src} alt="Riva Solutions Project" />
+        </div>
+      </div>
+      
+      <div class="project-item" data-project="advr">
+        <div class="project-number">02.</div>
+        <div class="project-title">ADVR 66</div>
+        <div class="project-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="project-image">
+          <img src={imageSvg.src} alt="ADVR 66" />
+        </div>
+        <div class="hover-image">
+          <img src={advrImg.src} alt="ADVR 66 Project" />
+        </div>
+      </div>
+      
+      <div class="project-item" data-project="elec">
+        <div class="project-number">03.</div>
+        <div class="project-title">Elec 66</div>
+        <div class="project-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="project-image">
+          <img src={imageSvg.src} alt="Elec 66" />
+        </div>
+        <div class="hover-image">
+          <img src={elecImg.src} alt="Elec 66 Project" />
+        </div>
+      </div>
+      
+      <div class="project-item" data-project="coming-soon">
+        <div class="project-number">04.</div>
+        <div class="project-title">Prochainement ..</div>
+        <div class="project-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="project-image">
+          <img src={imageSvg.src} alt="Prochainement" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: 4rem 100px;
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 600;
+  }
+  
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .project-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 
+      "number title image"
+      "number description image";
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eaeaea;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .project-number {
+    grid-area: number;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding-right: 2rem;
+  }
+  
+  .project-title {
+    grid-area: title;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .project-description {
+    grid-area: description;
+    color: #666;
+    max-width: 80%;
+  }
+  
+  .project-image {
+    grid-area: image;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .project-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .projects-section {
+      padding: 4rem 20px;
+    }
+    
+    .project-item {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 
+        "number title"
+        "description description"
+        "image image";
+      gap: 0.75rem;
+    }
+    
+    .project-description {
+      max-width: 100%;
+    }
+    
+    .project-image {
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .title {
+      font-size: 2rem;
+    }
+    
+    .project-number, .project-title {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .hover-image {
+    position: fixed;
+    width: 300px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .hover-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    projectItems.forEach(item => {
+      const hoverImage = item.querySelector('.hover-image');
+      
+      item.addEventListener('mouseenter', () => {
+        if (hoverImage) {
+          hoverImage.style.opacity = '1';
+          hoverImage.style.visibility = 'visible';
+        }
+      });
+      
+      item.addEventListener('mousemove', (e) => {
+        if (hoverImage) {
+          // Position the image near the cursor but ensure it stays in viewport
+          const x = e.clientX + 20;
+          const y = e.clientY + 20;
+          
+          // Adjust position to keep image in viewport
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          const imageWidth = 300;
+          const imageHeight = hoverImage.offsetHeight;
+          
+          let posX = x;
+          let posY = y;
+          
+          if (x + imageWidth > viewportWidth) {
+            posX = x - imageWidth - 40;
+          }
+          
+          if (y + imageHeight > viewportHeight) {
+            posY = y - imageHeight - 40;
+          }
+          
+          hoverImage.style.left = `${posX}px`;
+          hoverImage.style.top = `${posY}px`;
+        }
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        if (hoverImage) {
+          hoverImage.style.opacity = '0';
+          hoverImage.style.visibility = 'hidden';
+        }
+      });
+    });
+  });
+</script>
