@@ -1,5 +1,6 @@
 ---
 // ProjectsSection.astro - Composant pour afficher la liste des projets
+import { Image } from 'astro:assets';
 import imageSvg from '../assets/image.svg';
 import rivaImg from '../assets/projects/riva.png';
 import advrImg from '../assets/projects/advr.png';
@@ -19,10 +20,10 @@ import elecImg from '../assets/projects/elec66.png';
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="project-image">
-          <img src={imageSvg.src} alt="Riva Solutions" />
+          <Image src={imageSvg} alt="Riva Solutions" width={50} height={50} />
         </div>
         <div class="hover-image">
-          <img src={rivaImg.src} alt="Riva Solutions Project" />
+          <Image src={rivaImg} alt="Riva Solutions Project" width={300} height={200} />
         </div>
       </div>
       
@@ -33,10 +34,10 @@ import elecImg from '../assets/projects/elec66.png';
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="project-image">
-          <img src={imageSvg.src} alt="ADVR 66" />
+          <Image src={imageSvg} alt="ADVR 66" width={50} height={50} />
         </div>
         <div class="hover-image">
-          <img src={advrImg.src} alt="ADVR 66 Project" />
+          <Image src={advrImg} alt="ADVR 66 Project" width={300} height={200} />
         </div>
       </div>
       
@@ -47,10 +48,10 @@ import elecImg from '../assets/projects/elec66.png';
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="project-image">
-          <img src={imageSvg.src} alt="Elec 66" />
+          <Image src={imageSvg} alt="Elec 66" width={50} height={50} />
         </div>
         <div class="hover-image">
-          <img src={elecImg.src} alt="Elec 66 Project" />
+          <Image src={elecImg} alt="Elec 66 Project" width={300} height={200} />
         </div>
       </div>
       
@@ -61,7 +62,7 @@ import elecImg from '../assets/projects/elec66.png';
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="project-image">
-          <img src={imageSvg.src} alt="Prochainement" />
+          <Image src={imageSvg} alt="Prochainement" width={50} height={50} />
         </div>
 
       </div>

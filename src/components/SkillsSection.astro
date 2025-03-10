@@ -1,0 +1,329 @@
+---
+// Import images from skills directory
+import { Image } from 'astro:assets';
+
+// You'll need to import your skill images
+const skillImages = await Astro.glob('../assets/skills/*');
+---
+
+<section class="skills-section" id="skills-section">
+  <div class="container">
+    <div class="skills-container">
+      <div class="skills-nav">
+        <div class="nav-items">
+          <div class="nav-item active" data-index="0">01</div>
+          <div class="nav-item" data-index="1">02</div>
+          <div class="nav-item" data-index="2">03</div>
+          <div class="nav-item" data-index="3">04</div>
+        </div>
+      </div>
+      
+      <div class="skills-content">
+        <div class="skill-items">
+          <div class="skill-item" data-index="0">
+            <div class="skill-image">
+              <Image 
+                src={skillImages[0]?.default} 
+                alt="Skill 1" 
+                width={450} 
+                height={450} 
+              />
+            </div>
+            <div class="skill-text">
+              <h3>UX/UI Design</h3>
+              <p>Je conçois des interfaces intuitives et esthétiques qui captivent vos utilisateurs et boostent vos conversions. En combinant recherche utilisateur, wireframes et prototypage interactif, je crée des expériences fluides et optimisées pour l'engagement, tout en respectant votre identité visuelle. Un design centré sur l'humain, mais aussi sur vos objectifs business.</p>
+            </div>
+          </div>
+          
+          <div class="skill-item" data-index="1">
+            <div class="skill-image">
+              <Image 
+                src={skillImages[2]?.default} 
+                alt="Skill 2" 
+                width={450} 
+                height={450} 
+              />
+            </div>
+            <div class="skill-text">
+              <h3>Programmation Web</h3>
+              <p>Des sites rapides, légers et sur-mesure grâce à ma maîtrise d'HTML/CSS/JS, d'Astro et de React. Je développe des interfaces dynamiques, SEO-friendly et parfaitement responsives, tout en garantissant un code propre et maintenable. Des solutions techniques modernes pour des performances qui font la différence.</p>
+            </div>
+          </div>
+          
+          <div class="skill-item" data-index="2">
+            <div class="skill-image">
+              <Image 
+                src={skillImages[3]?.default} 
+                alt="Skill 3" 
+                width={450} 
+                height={450} 
+              />
+            </div>
+            <div class="skill-text">
+              <h3>CMS</h3>
+              <p>Vous voulez un site simple à gérer, sans compromis sur le design ? Je crée des sites WordPress et Wix personnalisés, optimisés pour le référencement et adaptés à tous écrans. Des solutions clé en main, livrées rapidement, avec une interface admin intuitive pour modifier votre contenu en toute autonomie.</p>
+            </div>
+          </div>
+          
+          <div class="skill-item" data-index="3">
+            <div class="skill-image">
+              <Image 
+                src={skillImages[1]?.default} 
+                alt="Skill 4" 
+                width={450} 
+                height={450} 
+              />
+            </div>
+            <div class="skill-text">
+              <h3>Ecommerce</h3>
+              <p>Boostez vos ventes avec une boutique en ligne performante et sécurisée. Je conçois des sites e-commerce ergonomiques, optimisés pour les conversions (panier intuitif, paiements sécurisés, fiche produit impactante) et mobile-first. Des solutions techniques solides pour transformer les visiteurs en clients fidèles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+    padding: 200px 0;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 100px;
+  }
+  
+  .skills-container {
+    display: flex;
+    gap: 4rem;
+    width: 100%;
+  }
+  
+  .skills-nav {
+    position: sticky;
+    top: 50vh;
+    transform: translateY(-50%);
+    height: fit-content;
+    align-self: flex-start;
+  }
+  
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .nav-item {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .nav-item.active {
+    color: #DB241E;
+    font-weight: 600;
+  }
+  
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #DB241E;
+  }
+  
+  .skills-content {
+    flex: 1;
+  }
+  
+  .skill-items {
+    position: relative;
+  }
+  
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    min-height: 80vh;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+  }
+  
+  .skill-item.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .skill-item.inactive {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  
+  .skill-image {
+    width: 450px;
+    height: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+  
+  .skill-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .skill-text {
+    flex: 1;
+  }
+  
+  .skill-text h3 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #0A1B40;
+    margin-bottom: 2rem;
+  }
+  
+  .skill-text p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+    
+    .skills-container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .skills-nav {
+      position: relative;
+      transform: none;
+      top: 0;
+    }
+    
+    .nav-items {
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .skill-item {
+      flex-direction: column;
+      gap: 2rem;
+      min-height: auto;
+      padding: 3rem 0;
+    }
+    
+    .skill-image {
+      width: 100%;
+      height: 300px;
+    }
+    
+    .skill-text h3 {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dynamically import ScrollMagic
+    import('scrollmagic').then((ScrollMagic) => {
+      const controller = new ScrollMagic.Controller();
+      
+      const skillItems = document.querySelectorAll('.skill-item');
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      // Make first item visible immediately
+      skillItems[0].classList.add('active');
+      
+      // Create a scene for each skill item
+      skillItems.forEach((item, index) => {
+        const scene = new ScrollMagic.Scene({
+          triggerElement: item,
+          triggerHook: 0.7, // trigger when 70% from the top of the viewport
+          duration: '80%'   // the scene lasts for 80% of the viewport height
+        })
+        .on('enter', () => {
+          // Activate current item
+          item.classList.add('active');
+          item.classList.remove('inactive');
+          
+          // Update navigation
+          navItems.forEach(nav => nav.classList.remove('active'));
+          navItems[index].classList.add('active');
+          
+          // Deactivate other items
+          skillItems.forEach((otherItem, otherIndex) => {
+            if (otherIndex !== index) {
+              otherItem.classList.remove('active');
+              otherItem.classList.add('inactive');
+            }
+          });
+        })
+        .on('leave', () => {
+          // Make item inactive when scrolling away
+          item.classList.remove('active');
+          item.classList.add('inactive');
+        })
+        .addTo(controller);
+      });
+      
+      // Click navigation
+      navItems.forEach((navItem, index) => {
+        navItem.addEventListener('click', () => {
+          // Scroll to the corresponding skill item
+          window.scrollTo({
+            top: skillItems[index].offsetTop - 100,
+            behavior: 'smooth'
+          });
+        });
+      });
+    }).catch(err => {
+      console.error('Failed to load ScrollMagic:', err);
+      
+      // Fallback behavior
+      const skillItems = document.querySelectorAll('.skill-item');
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      // Make all items visible without animation
+      skillItems.forEach(item => {
+        item.classList.add('active');
+      });
+      
+      // Simple click navigation
+      navItems.forEach((navItem, index) => {
+        navItem.addEventListener('click', () => {
+          navItems.forEach(nav => nav.classList.remove('active'));
+          navItem.classList.add('active');
+          
+          window.scrollTo({
+            top: skillItems[index].offsetTop - 100,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  });
+</script>

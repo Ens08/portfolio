@@ -13,16 +13,31 @@ const duplicatedLogos = [...logos, ...logos, ...logos];
 <div class="ticker-container">
   <div class="ticker">
     <div class="ticker-wrapper">
-      {duplicatedLogos.map((logo) => (
+      {duplicatedLogos.map((logo, index) => (
         <div class="ticker-item">
-          <img src={logo.default.src} alt="Logo" loading="eager" decoding="async" fetchpriority="high" />
+          <Image 
+            src={logo.default} 
+            alt="Logo" 
+            width={150} 
+            height={50} 
+            loading=lazy 
+            decoding="async" 
+          />
         </div>
       ))}
     </div>
     <div class="ticker-wrapper" aria-hidden="true">
-      {duplicatedLogos.map((logo) => (
+      {duplicatedLogos.map((logo, index) => (
         <div class="ticker-item">
-          <img src={logo.default.src} alt="Logo" loading="eager" decoding="async" fetchpriority="high" />
+          <Image 
+            src={logo.default} 
+            alt="Logo" 
+            width={150} 
+            height={50} 
+            class="ticker-logo"
+            loading=lazy
+            decoding="async" 
+          />
         </div>
       ))}
     </div>
@@ -64,7 +79,8 @@ const duplicatedLogos = [...logos, ...logos, ...logos];
     transform: translateZ(0);
   }
 
-  .ticker-item img {
+  .ticker-item img,
+  .ticker-item :global(img) {
     height: 50px;
     width: auto;
     object-fit: contain;
@@ -98,16 +114,6 @@ const duplicatedLogos = [...logos, ...logos, ...logos];
 </style>
 
 <script>
-  // Preload all images to ensure they're ready before animation starts
-  document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('.ticker-item img');
-    
-    // Force browser to load all images immediately
-    images.forEach(img => {
-      if (img instanceof HTMLImageElement) {
-        const imageLoader = new Image();
-        imageLoader.src = img.src;
-      }
-    });
-  });
+  // The preload script is no longer needed as Astro's Image component 
+  // handles optimization automatically
 </script>

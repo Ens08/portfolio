@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import landscape from '../assets/landscape.png';
 ---
 
@@ -8,7 +9,12 @@ import landscape from '../assets/landscape.png';
     
     <div class="content-wrapper">
       <div class="image-container">
-        <img src={landscape.src} alt="Paysage japonais avec le Mont Fuji" />
+        <Image 
+          src={landscape} 
+          alt="Paysage japonais avec le Mont Fuji" 
+          width={500} 
+          height={400} 
+        />
       </div>
       
       <div class="text-content">

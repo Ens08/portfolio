@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import dotIcon from '../assets/dot.png';
 import waveIcon from '../assets/wave.png';
 import waveTriangleIcon from '../assets/wave-triangle.png';
@@ -12,7 +13,7 @@ import arrowRightIcon from '../assets/arrow-right.svg';
     <div class="methodology-steps">
       <div class="step">
         <div class="step-icon">
-          <img src={dotIcon.src} alt="Icône points" />
+          <Image src={dotIcon} alt="Icône points" width={100} height={100} />
         </div>
         <div class="step-content">
           <h3>Briefing & Analyse</h3>
@@ -21,12 +22,12 @@ import arrowRightIcon from '../assets/arrow-right.svg';
       </div>
       
       <div class="arrow">
-        <img src={arrowRightIcon.src} alt="Flèche droite" />
+        <Image src={arrowRightIcon} alt="Flèche droite" width={80} height={40} />
       </div>
       
       <div class="step">
         <div class="step-icon">
-          <img src={waveIcon.src} alt="Icône vague" />
+          <Image src={waveIcon} alt="Icône vague" width={100} height={100} />
         </div>
         <div class="step-content">
           <h3>Conception & Prototypage</h3>
@@ -35,12 +36,12 @@ import arrowRightIcon from '../assets/arrow-right.svg';
       </div>
       
       <div class="arrow">
-        <img src={arrowRightIcon.src} alt="Flèche droite" />
+        <Image src={arrowRightIcon} alt="Flèche droite" width={80} height={40} />
       </div>
       
       <div class="step">
         <div class="step-icon">
-          <img src={waveTriangleIcon.src} alt="Icône vague triangulaire" />
+          <Image src={waveTriangleIcon} alt="Icône vague triangulaire" width={100} height={100} />
         </div>
         <div class="step-content">
           <h3>Création, Tests & Lancement</h3>
