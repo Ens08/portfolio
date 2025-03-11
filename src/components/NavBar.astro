@@ -5,13 +5,16 @@
   <div class="nav-container">
     <div class="logo">
       <!-- Remplacez par votre logo SVG ou image -->
-      <img src="./src/assets/logo.png" alt="Logo" width="50">
+      <a href="/">
+        <img src="./src/assets/logo.png" alt="Logo" width="50">
+      </a>
     </div>
     <div class="desktop-menu">
-      <a href="/">Accueil</a>
-      <a href="/competences">Mes compétences</a>
-      <a href="/projets">Projets</a>
-      <a href="/contact">Contact</a>
+      <a href="/#header">Accueil</a>
+      <a href="/#projects">Projets</a>
+      <a href="/#methodology">Ma méthodologie</a>
+      <a href="/#skills">Mes compétences</a>
+      <a href="/#contact">Contact</a>
     </div>
     <button class="mobile-menu-toggle" aria-label="Menu">
       <span></span>
@@ -20,10 +23,11 @@
     </button>
   </div>
   <div class="mobile-menu">
-    <a href="/">Accueil</a>
-    <a href="/competences">Mes compétences</a>
-    <a href="/projets">Projets</a>
-    <a href="/contact">Contact</a>
+    <a href="/#header">Accueil</a>
+    <a href="/#projects">Projets</a>
+    <a href="/#methodology">Ma méthodologie</a>
+    <a href="/#skills">Mes compétences</a>
+    <a href="/#contact">Contact</a>
   </div>
 </nav>
 
@@ -112,56 +116,6 @@
     background: none;
     border: none;
     cursor: pointer;
-  }
-
-  .mobile-menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 5px 0;
-  }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 2rem;
-    z-index: 999;
-  }
-
-  .mobile-menu a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.5rem;
-    margin: 0.5rem 0;
-    position: relative;
-    padding-bottom: 5px;
-  }
-
-  .mobile-menu a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: #DB241E;
-    transition: width 0.3s ease, left 0.3s ease;
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
     position: relative;
     z-index: 1001;
     width: 30px;
@@ -189,6 +143,21 @@
     transform: translateY(-8px) rotate(-45deg);
   }
 
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 2rem;
+    z-index: 999;
+  }
+
   @media (max-width: 768px) {
     .desktop-menu {
       display: none;
@@ -213,15 +182,48 @@
     mobileMenuToggle.classList.toggle('open');
   });
 
-  // Add active class to current page link
-  const currentPath = window.location.pathname;
+  // Mise à jour pour gérer les ancres au lieu des routes
   const navLinks = document.querySelectorAll('.desktop-menu a, .mobile-menu a');
   
-  navLinks.forEach(link => {
-    const linkPath = link.getAttribute('href');
-    if (linkPath === currentPath || 
-        (linkPath !== '/' && currentPath.startsWith(linkPath))) {
-      link.classList.add('active');
+  // Fonction pour mettre à jour la classe active en fonction de la section visible
+  function updateActiveLink() {
+    // Ne pas exécuter la logique de suivi des sections si nous ne sommes pas sur la page d'accueil
+    if (!document.querySelector('#header')) {
+      return;
     }
-  });
+    
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    
+    // Détection spéciale pour le bas de page
+    const isAtBottom = (scrollPosition + windowHeight) >= docHeight - 50;
+    
+    // Si on est tout en bas, activer le lien Contact
+    if (isAtBottom) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const contactLinks = document.querySelectorAll('a[href="/#contact"]');
+      contactLinks.forEach(link => link.classList.add('active'));
+      return;
+    }
+    
+    // Sinon, détection normale des sections
+    const sections = document.querySelectorAll('section[id]');
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLinks = document.querySelectorAll(`a[href="/#${sectionId}"]`);
+        activeLinks.forEach(link => link.classList.add('active'));
+      }
+    });
+  }
+  
+  // Mettre à jour au chargement et au défilement
+  window.addEventListener('load', updateActiveLink);
+  window.addEventListener('scroll', updateActiveLink);
 </script>

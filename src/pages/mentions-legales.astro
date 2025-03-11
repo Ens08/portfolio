@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <main class="mentions-legales">
+    <div class="container">
+      <h1>Mentions Légales</h1>
+      
+      <div class="content">
+        <h2>Éditeur du site</h2>
+        <p>
+          Elian Bourdil<br>
+          elianb.pro@gmail.com<br>
+          Numéro SIRET : 830 777 298
+        </p>
+        
+        <h2>Hébergement du site</h2>
+        <p>
+          o2switch<br>
+          222-224 Boulevard Gustave Flaubert<br>
+          63000 Clermont-Ferrand<br>
+          France<br>
+          Téléphone : 04 44 44 60 40<br>
+          Site web : <a href="https://www.o2switch.fr/" target="_blank">https://www.o2switch.fr/</a>
+        </p>
+        
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus présents sur ce site, incluant, de manière non exhaustive, les textes, images, graphismes, logos et icônes, sont la propriété exclusive d'Elian Bourdil, à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs. Toute reproduction, distribution, modification, adaptation, retransmission ou publication de ces différents éléments est strictement interdite sans l'accord écrit préalable d'Elian Bourdil.
+        </p>
+        
+        <h2>Responsabilité</h2>
+        <p>
+          Elian Bourdil s'efforce d'assurer au mieux de ses possibilités, l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, il ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur ce site. En conséquence, Elian Bourdil décline toute responsabilité pour toute imprécision, inexactitude ou omission portant sur des informations disponibles sur ce site.
+        </p>
+        
+        <h2>Données personnelles</h2>
+        <p>
+          Aucune donnée personnelle n'est collectée à votre insu sur ce site. Les seules données personnelles susceptibles d'être collectées sont celles que vous transmettez volontairement via le formulaire de contact ou par l'envoi d'un courrier électronique. Ces informations sont utilisées exclusivement pour vous répondre et ne sont en aucun cas communiquées à des tiers. Conformément à la loi "Informatique et Libertés" du 6 janvier 1978 modifiée et au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition aux données personnelles vous concernant. Pour exercer ces droits, vous pouvez contacter Elian Bourdil à l'adresse suivante : elianb.pro@gmail.com.
+        </p>
+        
+        <h2>Liens hypertextes</h2>
+        <p>
+          Ce site peut contenir des liens hypertextes vers d'autres sites présents sur le réseau Internet. Les liens vers ces autres ressources vous font quitter le site d'Elian Bourdil. Il est possible de créer un lien vers la page de présentation de ce site sans autorisation expresse d'Elian Bourdil. Aucune autorisation ou demande d'information préalable ne peut être exigée par Elian Bourdil à l'égard d'un site qui souhaite établir un lien vers le sien.
+        </p>
+        
+        <h2>Loi applicable</h2>
+        <p>
+          Le présent site est soumis au droit français.
+        </p>
+        
+        <p class="note">
+          Ces mentions légales sont susceptibles d'être modifiées à tout moment et sans préavis ; nous vous invitons donc à les consulter régulièrement.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .mentions-legales {
+    margin-top: 70px; /* To account for the fixed navbar */
+    padding: 4rem 100px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    color: #0A1B40;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .content {
+    text-align: left;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1em;
+    color: #1D1D1B;
+    line-height: 1.6;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  a {
+    color: #DB241E;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .note {
+    font-style: italic;
+    margin-top: 2rem;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .mentions-legales {
+      padding: 4rem 20px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+</style>

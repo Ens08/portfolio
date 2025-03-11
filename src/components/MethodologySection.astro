@@ -6,7 +6,7 @@ import waveTriangleIcon from '../assets/wave-triangle.png';
 import arrowRightIcon from '../assets/arrow-right.svg';
 ---
 
-<section class="methodology-section">
+<section id="methodology" class="methodology-section">
   <div class="container">
     <h2 class="title">Ma méthologie</h2>
     
@@ -93,7 +93,6 @@ import arrowRightIcon from '../assets/arrow-right.svg';
     flex-direction: column;
     align-items: center;
     text-align: flex-start;
-    overflow: auto;
   }
   
   .step-icon {
@@ -146,8 +145,11 @@ import arrowRightIcon from '../assets/arrow-right.svg';
     }
     
     .step {
-      max-width: 100%;
       width: 100%;
+      height: auto;
+      min-width: unset;
+      max-width: 500px;
+      margin-bottom: 1rem;
     }
     
     .arrow {
@@ -168,6 +170,7 @@ import arrowRightIcon from '../assets/arrow-right.svg';
     
     .step {
       padding: 1.5rem;
+      max-width: 70%;
     }
     
     .step-icon {
@@ -181,8 +184,16 @@ import arrowRightIcon from '../assets/arrow-right.svg';
   }
   
   @media (max-width: 480px) {
+    .methodology-section {
+      padding: 3rem 15px;
+    }
+    
     .title {
       font-size: 1.75rem;
+    }
+    
+    .step {
+      padding: 1.25rem;
     }
     
     .step-icon {

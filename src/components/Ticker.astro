@@ -3,8 +3,9 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
-// Récupération des images du dossier assets/ticker
-const logos = await Astro.glob('../assets/ticker/*');
+// Replace Astro.glob with import.meta.glob
+const logoModules = import.meta.glob('../assets/ticker/*', { eager: true });
+const logos = Object.values(logoModules);
 
 // Duplicate the logos array to ensure we have enough items for a smooth loop
 const duplicatedLogos = [...logos, ...logos, ...logos];
@@ -20,7 +21,7 @@ const duplicatedLogos = [...logos, ...logos, ...logos];
             alt="Logo" 
             width={150} 
             height={50} 
-            loading=lazy 
+            loading="lazy" 
             decoding="async" 
           />
         </div>

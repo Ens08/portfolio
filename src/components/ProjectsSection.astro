@@ -7,7 +7,7 @@ import advrImg from '../assets/projects/advr.png';
 import elecImg from '../assets/projects/elec66.png';
 ---
 
-<section class="projects-section">
+<section id="projects" class="projects-section">
   <div class="container">
     <p class="subtitle">La passion nous mènent ici</p>
     <h2 class="title">Mes différents projets</h2>
@@ -153,11 +153,8 @@ import elecImg from '../assets/projects/elec66.png';
     }
     
     .project-item {
-      grid-template-columns: auto 1fr;
-      grid-template-areas: 
-        "number title"
-        "description description"
-        "image image";
+      display: flex;
+      flex-direction: column;
       gap: 0.75rem;
     }
     
@@ -165,8 +162,46 @@ import elecImg from '../assets/projects/elec66.png';
       max-width: 100%;
     }
     
+    /* Créer un conteneur pour le numéro et le titre */
+    .project-item::before {
+      content: "";
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-number {
+      padding-right: 0.75rem;
+      float: left;
+      margin-top: 0;
+    }
+    
+    .project-title {
+      margin-top: 0;
+      margin-left: 0;
+      display: inline-block;
+    }
+    
     .project-image {
-      justify-content: flex-start;
+      display: none;
+    }
+    
+    .hover-image {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      width: 100%;
+      max-width: none;
+      margin-top: 1rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      pointer-events: auto;
+    }
+    
+    .hover-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
   }
   
@@ -204,51 +239,64 @@ import elecImg from '../assets/projects/elec66.png';
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const projectItems = document.querySelectorAll('.project-item');
+    const isMobile = window.innerWidth <= 768;
     
     projectItems.forEach(item => {
       const hoverImage = item.querySelector('.hover-image');
       
-      item.addEventListener('mouseenter', () => {
-        if (hoverImage) {
-          hoverImage.style.opacity = '1';
-          hoverImage.style.visibility = 'visible';
-        }
-      });
-      
-      item.addEventListener('mousemove', (e) => {
-        if (hoverImage) {
-          // Position the image near the cursor but ensure it stays in viewport
-          const x = e.clientX + 20;
-          const y = e.clientY + 20;
-          
-          // Adjust position to keep image in viewport
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
-          const imageWidth = 300;
-          const imageHeight = hoverImage.offsetHeight;
-          
-          let posX = x;
-          let posY = y;
-          
-          if (x + imageWidth > viewportWidth) {
-            posX = x - imageWidth - 40;
+      // Sur mobile, on affiche directement les images sans animation
+      if (isMobile && hoverImage) {
+        hoverImage.style.position = 'static';
+        hoverImage.style.opacity = '1';
+        hoverImage.style.visibility = 'visible';
+        hoverImage.style.pointerEvents = 'auto';
+        hoverImage.style.width = '100%';
+        hoverImage.style.maxWidth = '300px';
+        hoverImage.style.marginTop = '1rem';
+      } else {
+        // Sur desktop, on garde le comportement de hover normal
+        item.addEventListener('mouseenter', () => {
+          if (hoverImage) {
+            hoverImage.style.opacity = '1';
+            hoverImage.style.visibility = 'visible';
           }
-          
-          if (y + imageHeight > viewportHeight) {
-            posY = y - imageHeight - 40;
+        });
+        
+        item.addEventListener('mousemove', (e) => {
+          if (hoverImage) {
+            // Position the image near the cursor but ensure it stays in viewport
+            const x = e.clientX + 20;
+            const y = e.clientY + 20;
+            
+            // Adjust position to keep image in viewport
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const imageWidth = 300;
+            const imageHeight = hoverImage.offsetHeight;
+            
+            let posX = x;
+            let posY = y;
+            
+            if (x + imageWidth > viewportWidth) {
+              posX = x - imageWidth - 40;
+            }
+            
+            if (y + imageHeight > viewportHeight) {
+              posY = y - imageHeight - 40;
+            }
+            
+            hoverImage.style.left = `${posX}px`;
+            hoverImage.style.top = `${posY}px`;
           }
-          
-          hoverImage.style.left = `${posX}px`;
-          hoverImage.style.top = `${posY}px`;
-        }
-      });
-      
-      item.addEventListener('mouseleave', () => {
-        if (hoverImage) {
-          hoverImage.style.opacity = '0';
-          hoverImage.style.visibility = 'hidden';
-        }
-      });
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          if (hoverImage) {
+            hoverImage.style.opacity = '0';
+            hoverImage.style.visibility = 'hidden';
+          }
+        });
+      }
     });
   });
 </script>

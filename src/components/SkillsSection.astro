@@ -2,14 +2,15 @@
 // Import images from skills directory
 import { Image } from 'astro:assets';
 
-// You'll need to import your skill images
-const skillImages = await Astro.glob('../assets/skills/*');
+// Replace Astro.glob with import.meta.glob
+const skillImagesModules = import.meta.glob('../assets/skills/*', { eager: true });
+const skillImages = Object.values(skillImagesModules);
 ---
 
-<section class="skills-section" id="skills-section">
+<section class="skills-section" id="skills">
   <div class="container">
     <div class="skills-container">
-      <div class="skills-nav">
+      <div class="skills-nav desktop-only">
         <div class="nav-items">
           <div class="nav-item active" data-index="0">01</div>
           <div class="nav-item" data-index="1">02</div>
@@ -207,6 +208,11 @@ const skillImages = await Astro.glob('../assets/skills/*');
   }
 
   @media (max-width: 768px) {
+    .skills-section {
+      padding: 60px 0;
+      min-height: auto;
+    }
+
     .container {
       padding: 0 20px;
     }
@@ -216,114 +222,126 @@ const skillImages = await Astro.glob('../assets/skills/*');
       gap: 2rem;
     }
     
-    .skills-nav {
-      position: relative;
-      transform: none;
-      top: 0;
-    }
-    
-    .nav-items {
-      flex-direction: row;
-      justify-content: center;
-      width: 100%;
+    .desktop-only {
+      display: none;
     }
     
     .skill-item {
       flex-direction: column;
       gap: 2rem;
       min-height: auto;
-      padding: 3rem 0;
+      padding: 2rem 0;
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      margin-bottom: 4rem; /* Augmentation de l'espace entre les sections */
     }
     
     .skill-image {
       width: 100%;
-      height: 300px;
+      height: 200px; /* Réduction de la hauteur des images sur mobile */
     }
     
     .skill-text h3 {
-      font-size: 2.5rem;
+      font-size: 2rem;
+      text-align: left; /* Alignement à gauche */
+    }
+
+    .skill-text p {
+      font-size: 1.1em;
+      text-align: left; /* Alignement à gauche */
     }
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Dynamically import ScrollMagic
-    import('scrollmagic').then((ScrollMagic) => {
-      const controller = new ScrollMagic.Controller();
-      
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // Simple mobile behavior - show all items
       const skillItems = document.querySelectorAll('.skill-item');
-      const navItems = document.querySelectorAll('.nav-item');
-      
-      // Make first item visible immediately
-      skillItems[0].classList.add('active');
-      
-      // Create a scene for each skill item
-      skillItems.forEach((item, index) => {
-        const scene = new ScrollMagic.Scene({
-          triggerElement: item,
-          triggerHook: 0.7, // trigger when 70% from the top of the viewport
-          duration: '80%'   // the scene lasts for 80% of the viewport height
-        })
-        .on('enter', () => {
-          // Activate current item
-          item.classList.add('active');
-          item.classList.remove('inactive');
-          
-          // Update navigation
-          navItems.forEach(nav => nav.classList.remove('active'));
-          navItems[index].classList.add('active');
-          
-          // Deactivate other items
-          skillItems.forEach((otherItem, otherIndex) => {
-            if (otherIndex !== index) {
-              otherItem.classList.remove('active');
-              otherItem.classList.add('inactive');
-            }
-          });
-        })
-        .on('leave', () => {
-          // Make item inactive when scrolling away
-          item.classList.remove('active');
-          item.classList.add('inactive');
-        })
-        .addTo(controller);
-      });
-      
-      // Click navigation
-      navItems.forEach((navItem, index) => {
-        navItem.addEventListener('click', () => {
-          // Scroll to the corresponding skill item
-          window.scrollTo({
-            top: skillItems[index].offsetTop - 100,
-            behavior: 'smooth'
-          });
-        });
-      });
-    }).catch(err => {
-      console.error('Failed to load ScrollMagic:', err);
-      
-      // Fallback behavior
-      const skillItems = document.querySelectorAll('.skill-item');
-      const navItems = document.querySelectorAll('.nav-item');
-      
-      // Make all items visible without animation
       skillItems.forEach(item => {
         item.classList.add('active');
       });
-      
-      // Simple click navigation
-      navItems.forEach((navItem, index) => {
-        navItem.addEventListener('click', () => {
-          navItems.forEach(nav => nav.classList.remove('active'));
-          navItem.classList.add('active');
-          
-          window.scrollTo({
-            top: skillItems[index].offsetTop - 100,
-            behavior: 'smooth'
+    } else {
+      // Desktop behavior with ScrollMagic
+      import('scrollmagic').then((ScrollMagic) => {
+        const controller = new ScrollMagic.Controller();
+        
+        const skillItems = document.querySelectorAll('.skill-item');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        // Make first item visible immediately
+        skillItems[0].classList.add('active');
+        
+        // Create a scene for each skill item
+        skillItems.forEach((item, index) => {
+          const scene = new ScrollMagic.Scene({
+            triggerElement: item,
+            triggerHook: 0.7,
+            duration: '80%'
+          })
+          .on('enter', () => {
+            // Activate current item
+            item.classList.add('active');
+            item.classList.remove('inactive');
+            
+            // Update navigation
+            navItems.forEach(nav => nav.classList.remove('active'));
+            navItems[index].classList.add('active');
+            
+            // Deactivate other items
+            skillItems.forEach((otherItem, otherIndex) => {
+              if (otherIndex !== index) {
+                otherItem.classList.remove('active');
+                otherItem.classList.add('inactive');
+              }
+            });
+          })
+          .on('leave', () => {
+            // Make item inactive when scrolling away
+            item.classList.remove('active');
+            item.classList.add('inactive');
+          })
+          .addTo(controller);
+        });
+        
+        // Click navigation
+        navItems.forEach((navItem, index) => {
+          navItem.addEventListener('click', () => {
+            // Scroll to the corresponding skill item
+            window.scrollTo({
+              top: skillItems[index].offsetTop - 100,
+              behavior: 'smooth'
+            });
+          });
+        });
+      }).catch(err => {
+        console.error('Failed to load ScrollMagic:', err);
+        
+        // Fallback behavior
+        const skillItems = document.querySelectorAll('.skill-item');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        // Make all items visible without animation
+        skillItems.forEach(item => {
+          item.classList.add('active');
+        });
+        
+        // Simple click navigation
+        navItems.forEach((navItem, index) => {
+          navItem.addEventListener('click', () => {
+            navItems.forEach(nav => nav.classList.remove('active'));
+            navItem.classList.add('active');
+            
+            window.scrollTo({
+              top: skillItems[index].offsetTop - 100,
+              behavior: 'smooth'
+            });
           });
         });
       });
-    });
+    }
   });
 </script>
