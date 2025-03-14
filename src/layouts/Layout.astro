@@ -1,6 +1,17 @@
 ---
 import NavBar from '../components/NavBar.astro';
 import '../styles/global.css';
+
+// SEO props with default values
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Elian | Webdesigner & Webmaster Freelance – Sites WordPress Sur-Mesure, UX/UI Épurées",
+  description = "Webdesigner passionné et expert WordPress, je crée des sites élégants, intuitifs et sécurisés. Alliant design minimaliste, performance technique et SEO, je transforme vos idées en expériences digitales engageantes. Développement clé en main, de la conception au lancement."
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="fr">
@@ -9,7 +20,16 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Elian B - Portfolio</title>
+		
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 	</head>
 	<body>
 		<NavBar />
