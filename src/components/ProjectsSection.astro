@@ -14,42 +14,39 @@ import elecImg from '../assets/projects/elec66.png';
     
     <div class="projects-list">
       <div class="project-item" data-project="riva">
-        <div class="project-number">01.</div>
-        <div class="project-title">Riva Solutions</div>
-        <div class="project-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div class="project-image">
-          <Image src={imageSvg} alt="Riva Solutions" width={50} height={50} />
-        </div>
+        <a href="https://riva-solution.com" target="_blank" rel="noopener noreferrer" class="project-link">
+          <div class="project-number">01.</div>
+          <div class="project-title">Riva Solutions</div>
+          <div class="project-image">
+            <Image src={imageSvg} alt="Riva Solutions" width={50} height={50} />
+          </div>
+        </a>
         <div class="hover-image">
           <Image src={rivaImg} alt="Riva Solutions Project" width={300} height={200} />
         </div>
       </div>
       
       <div class="project-item" data-project="advr">
-        <div class="project-number">02.</div>
-        <div class="project-title">ADVR 66</div>
-        <div class="project-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div class="project-image">
-          <Image src={imageSvg} alt="ADVR 66" width={50} height={50} />
-        </div>
+        <a href="https://advr66.fr" target="_blank" rel="noopener noreferrer" class="project-link">
+          <div class="project-number">02.</div>
+          <div class="project-title">ADVR 66</div>
+          <div class="project-image">
+            <Image src={imageSvg} alt="ADVR 66" width={50} height={50} />
+          </div>
+        </a>
         <div class="hover-image">
           <Image src={advrImg} alt="ADVR 66 Project" width={300} height={200} />
         </div>
       </div>
       
       <div class="project-item" data-project="elec">
-        <div class="project-number">03.</div>
-        <div class="project-title">Elec 66</div>
-        <div class="project-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div class="project-image">
-          <Image src={imageSvg} alt="Elec 66" width={50} height={50} />
-        </div>
+        <a href="https://elec66.fr" target="_blank" rel="noopener noreferrer" class="project-link">
+          <div class="project-number">03.</div>
+          <div class="project-title">Elec 66</div>
+          <div class="project-image">
+            <Image src={imageSvg} alt="Elec 66" width={50} height={50} />
+          </div>
+        </a>
         <div class="hover-image">
           <Image src={elecImg} alt="Elec 66 Project" width={300} height={200} />
         </div>
@@ -58,13 +55,9 @@ import elecImg from '../assets/projects/elec66.png';
       <div class="project-item" data-project="coming-soon">
         <div class="project-number">04.</div>
         <div class="project-title">Prochainement ..</div>
-        <div class="project-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed lacinia nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
         <div class="project-image">
           <Image src={imageSvg} alt="Prochainement" width={50} height={50} />
         </div>
-
       </div>
     </div>
   </div>
@@ -147,6 +140,12 @@ import elecImg from '../assets/projects/elec66.png';
   }
   
   /* Responsive styles */
+  .project-link {
+    display: contents; /* Ceci permet aux enfants de participer au grid layout du parent */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    color: inherit;
+  }
+  
   @media (max-width: 768px) {
     .projects-section {
       padding: 4rem 20px;
@@ -243,6 +242,7 @@ import elecImg from '../assets/projects/elec66.png';
     
     projectItems.forEach(item => {
       const hoverImage = item.querySelector('.hover-image');
+      const projectLink = item.querySelector('.project-link');
       
       // Sur mobile, on affiche directement les images sans animation
       if (isMobile && hoverImage) {
@@ -255,14 +255,14 @@ import elecImg from '../assets/projects/elec66.png';
         hoverImage.style.marginTop = '1rem';
       } else {
         // Sur desktop, on garde le comportement de hover normal
-        item.addEventListener('mouseenter', () => {
+        const handleMouseEnter = () => {
           if (hoverImage) {
             hoverImage.style.opacity = '1';
             hoverImage.style.visibility = 'visible';
           }
-        });
+        };
         
-        item.addEventListener('mousemove', (e) => {
+        const handleMouseMove = (e) => {
           if (hoverImage) {
             // Position the image near the cursor but ensure it stays in viewport
             const x = e.clientX + 20;
@@ -288,14 +288,25 @@ import elecImg from '../assets/projects/elec66.png';
             hoverImage.style.left = `${posX}px`;
             hoverImage.style.top = `${posY}px`;
           }
-        });
+        };
         
-        item.addEventListener('mouseleave', () => {
+        const handleMouseLeave = () => {
           if (hoverImage) {
             hoverImage.style.opacity = '0';
             hoverImage.style.visibility = 'hidden';
           }
-        });
+        };
+        
+        // Appliquer les événements à l'élément parent et au lien
+        item.addEventListener('mouseenter', handleMouseEnter);
+        item.addEventListener('mousemove', handleMouseMove);
+        item.addEventListener('mouseleave', handleMouseLeave);
+        
+        if (projectLink) {
+          projectLink.addEventListener('mouseenter', handleMouseEnter);
+          projectLink.addEventListener('mousemove', handleMouseMove);
+          projectLink.addEventListener('mouseleave', handleMouseLeave);
+        }
       }
     });
   });

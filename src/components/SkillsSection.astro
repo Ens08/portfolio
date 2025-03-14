@@ -62,7 +62,7 @@ const skillImages = Object.values(skillImagesModules);
             </div>
             <div class="skill-text">
               <h3>CMS</h3>
-              <p>Vous voulez un site simple à gérer, sans compromis sur le design ? Je crée des sites WordPress et Wix personnalisés, optimisés pour le référencement et adaptés à tous écrans. Des solutions clé en main, livrées rapidement, avec une interface admin intuitive pour modifier votre contenu en toute autonomie.</p>
+              <p>Vous voulez un site simple à gérer, sans compromis sur le design ? Je crée des sites WordPress personnalisés, optimisés pour le référencement et adaptés à tous écrans. Des solutions clé en main, livrées rapidement, avec une interface admin intuitive pour modifier votre contenu en toute autonomie.</p>
             </div>
           </div>
           
@@ -76,8 +76,8 @@ const skillImages = Object.values(skillImagesModules);
               />
             </div>
             <div class="skill-text">
-              <h3>Ecommerce</h3>
-              <p>Boostez vos ventes avec une boutique en ligne performante et sécurisée. Je conçois des sites e-commerce ergonomiques, optimisés pour les conversions (panier intuitif, paiements sécurisés, fiche produit impactante) et mobile-first. Des solutions techniques solides pour transformer les visiteurs en clients fidèles.</p>
+              <h3>Sécurité site web</h3>
+              <p>Votre réputation mérite une sécurité sans concession. Je déploie des mesures proactives pour protéger votre site : chiffrement SSL, audits réguliers, mises à jour critiques et sauvegardes automatisées. En sécurisant chaque interaction (formulaires, connexions, paiements), je réduis les risques tout en renforçant la confiance de vos visiteurs. Transparence et réactivité face aux menaces font de votre sécurité un argument crédible, pas une promesse vide. Convertissez avec sérénité, en montrant que la protection de leurs données est votre priorité.</p>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ const skillImages = Object.values(skillImagesModules);
   
   .skills-nav {
     position: sticky;
-    top: 50vh;
+    top: 50%;
     transform: translateY(-50%);
     height: fit-content;
     align-self: flex-start;
@@ -126,8 +126,6 @@ const skillImages = Object.values(skillImagesModules);
     font-size: 2rem;
     font-weight: 500;
     color: #999;
-    cursor: pointer;
-    transition: color 0.3s ease;
     position: relative;
     padding-left: 20px;
   }
@@ -161,19 +159,16 @@ const skillImages = Object.values(skillImagesModules);
     gap: 4rem;
     min-height: 80vh;
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.2s ease; /* Uniquement transition d'opacité */
     position: relative;
   }
   
   .skill-item.active {
     opacity: 1;
-    transform: translateY(0);
   }
   
   .skill-item.inactive {
     opacity: 0;
-    transform: translateY(-50px);
   }
   
   .skill-image {
@@ -275,48 +270,42 @@ const skillImages = Object.values(skillImagesModules);
         // Make first item visible immediately
         skillItems[0].classList.add('active');
         
-        // Create a scene for each skill item
+        // Utiliser la section entière comme déclencheur
+        const skillsSection = document.querySelector('.skills-section');
+        
+        // Définir des points de déclenchement plus rapprochés pour une meilleure distribution
+        const triggerPoints = [0, 0.25, 0.45, 0.65]; // Points de déclenchement ajustés
+        
+        // Créer une scène pour chaque élément de compétence
         skillItems.forEach((item, index) => {
           const scene = new ScrollMagic.Scene({
-            triggerElement: item,
-            triggerHook: 0.7,
-            duration: '80%'
+            triggerElement: skillsSection,
+            triggerHook: 0.2,
+            offset: triggerPoints[index] * skillsSection.offsetHeight,
+            duration: '20%'
           })
           .on('enter', () => {
-            // Activate current item
+            // Activer l'élément actuel avec une légère animation de fade-in uniquement
+            item.style.transition = "opacity 0.5s ease";
             item.classList.add('active');
             item.classList.remove('inactive');
             
-            // Update navigation
+            // Mettre à jour la navigation
             navItems.forEach(nav => nav.classList.remove('active'));
             navItems[index].classList.add('active');
             
-            // Deactivate other items
+            // Désactiver les autres éléments avec une légère animation de fade-out
             skillItems.forEach((otherItem, otherIndex) => {
               if (otherIndex !== index) {
+                otherItem.style.transition = "opacity 0.15s ease";
                 otherItem.classList.remove('active');
                 otherItem.classList.add('inactive');
               }
             });
           })
-          .on('leave', () => {
-            // Make item inactive when scrolling away
-            item.classList.remove('active');
-            item.classList.add('inactive');
-          })
           .addTo(controller);
         });
         
-        // Click navigation
-        navItems.forEach((navItem, index) => {
-          navItem.addEventListener('click', () => {
-            // Scroll to the corresponding skill item
-            window.scrollTo({
-              top: skillItems[index].offsetTop - 100,
-              behavior: 'smooth'
-            });
-          });
-        });
       }).catch(err => {
         console.error('Failed to load ScrollMagic:', err);
         
@@ -327,19 +316,6 @@ const skillImages = Object.values(skillImagesModules);
         // Make all items visible without animation
         skillItems.forEach(item => {
           item.classList.add('active');
-        });
-        
-        // Simple click navigation
-        navItems.forEach((navItem, index) => {
-          navItem.addEventListener('click', () => {
-            navItems.forEach(nav => nav.classList.remove('active'));
-            navItem.classList.add('active');
-            
-            window.scrollTo({
-              top: skillItems[index].offsetTop - 100,
-              behavior: 'smooth'
-            });
-          });
         });
       });
     }
