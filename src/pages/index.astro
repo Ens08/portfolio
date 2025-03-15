@@ -32,11 +32,15 @@ import Footer from '../components/Footer.astro';
 
   .container {
     padding: 0;
+    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur */
+    max-width: 100%; /* Empêche toute limitation de largeur */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
   }
 
   @media (max-width: 768px) {
     .container {
       padding: 0;
+      width: 100%;
     }
   }
 </style>

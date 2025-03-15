@@ -56,14 +56,17 @@ import arrowRightIcon from '../assets/arrow-right.svg';
   .methodology-section {
     padding: 6rem 100px;
     background-color: #F5F5F5;
+    width: 100%; /* Ajout pour assurer la pleine largeur */
+    box-sizing: border-box; /* Pour inclure le padding dans la largeur */
   }
   
   .container {
-    max-width: 100%;
+    max-width: 100%; /* Modifié pour prendre toute la largeur */
     margin: 0 auto;
+    width: 100%; /* Ajout pour assurer la pleine largeur */
   }
   
-  .title {
+    .title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 4rem;
@@ -161,6 +164,8 @@ import arrowRightIcon from '../assets/arrow-right.svg';
   @media (max-width: 768px) {
     .methodology-section {
       padding: 4rem 20px;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .title {

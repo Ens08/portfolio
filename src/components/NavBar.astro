@@ -185,6 +185,15 @@ import Logo from '../assets/logo-elian.png';
   // Mise à jour pour gérer les ancres au lieu des routes
   const navLinks = document.querySelectorAll('.desktop-menu a, .mobile-menu a');
   
+  // Ajouter un gestionnaire d'événements pour fermer le menu mobile lors du clic sur un lien
+  const mobileLinks = document.querySelectorAll('.mobile-menu a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.style.display = 'none';
+      mobileMenuToggle.classList.remove('open');
+    });
+  });
+  
   // Fonction pour mettre à jour la classe active en fonction de la section visible
   function updateActiveLink() {
     // Ne pas exécuter la logique de suivi des sections si nous ne sommes pas sur la page d'accueil
